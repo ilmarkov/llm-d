@@ -1,0 +1,24 @@
+extends: ../../../glm53-agg-dep.yaml
+model:
+  image_ref: vllm.nightly_2026-11-16
+roles:
+  decode:
+    workload_name: glm53-eplb-agg-dep8-campaign-decode
+    lws:
+      size: 2
+      replicas: 1
+    parallelism:
+      tp: 1
+      dp: 8
+      ep: true
+    vllm:
+      enable_eplb: true
+      eplb_config:
+        num_redundant_experts: 16
+        use_async: true
+        policy: default
+        window_size: 100
+        step_interval: 1000
+        communicator: nixl
+        log_balancedness: false
+release: glm53-eplb-agg-dep8-campaign
