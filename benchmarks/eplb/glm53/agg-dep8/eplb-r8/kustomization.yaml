@@ -10,11 +10,13 @@ patches:
     kind: HTTPRoute
     name: ilmarkov-2-glm53-eplb-agg-dep8-campaign-route
   patch: "- op: add\n  path: /spec/rules/-\n  value:\n    matches:\n    - path:\n\
-    \        type: Exact\n        value: /tokenize\n    backendRefs:\n    - group:\
-    \ ''\n      kind: Service\n      name: ilmarkov-2-glm53-eplb-agg-dep8-campaign-tokenize-dp0\n\
+    \        type: Exact\n        value: /tokenize\n    backendRefs: &id001\n    -\
+    \ group: ''\n      kind: Service\n      name: ilmarkov-2-glm53-eplb-agg-dep8-campaign-tokenize-dp0\n\
     \      port: 8000\n      weight: 1\n    - group: ''\n      kind: Service\n   \
     \   name: ilmarkov-2-glm53-eplb-agg-dep8-campaign-tokenize-dp1\n      port: 8000\n\
     \      weight: 1\n    - group: ''\n      kind: Service\n      name: ilmarkov-2-glm53-eplb-agg-dep8-campaign-tokenize-dp2\n\
     \      port: 8000\n      weight: 1\n    - group: ''\n      kind: Service\n   \
     \   name: ilmarkov-2-glm53-eplb-agg-dep8-campaign-tokenize-dp3\n      port: 8000\n\
-    \      weight: 1\n"
+    \      weight: 1\n- op: add\n  path: /spec/rules/-\n  value:\n    matches:\n \
+    \   - path:\n        type: Exact\n        value: /detokenize\n    backendRefs:\
+    \ *id001\n"
