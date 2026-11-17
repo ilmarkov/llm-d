@@ -47,6 +47,8 @@ spec:
             - --reasoning-parser
             - qwen3
           env:
+            - name: HOME
+              value: /tmp
             - name: HF_HOME
               value: /tmp/huggingface
             - name: XDG_CACHE_HOME
