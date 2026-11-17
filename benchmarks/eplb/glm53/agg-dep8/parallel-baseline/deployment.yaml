@@ -33,7 +33,7 @@ data:
 apiVersion: leaderworkerset.x-k8s.io/v1
 kind: LeaderWorkerSet
 metadata:
-  name: ilmarkov-2-glm53-eplb-agg-dep8-parallel-baseline-decode
+  name: ilmarkov-2-glm53-eplb-agg-dep8-base-decode
   labels:
     app.kubernetes.io/name: manifesto
     app.kubernetes.io/instance: ilmarkov-2-glm53-eplb-agg-dep8-parallel-baseline

@@ -3,7 +3,7 @@ model:
   image_ref: vllm.nightly_2026-11-16
 roles:
   decode:
-    workload_name: glm53-eplb-agg-dep8-parallel-baseline-decode
+    workload_name: glm53-eplb-agg-dep8-base-decode
     lws:
       size: 2
       replicas: 1
