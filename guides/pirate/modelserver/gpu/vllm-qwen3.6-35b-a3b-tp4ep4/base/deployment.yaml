@@ -1,11 +1,12 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: vllm-qwen36-35b-a3b
   labels:
     llm-d.ai/model: Qwen3.6-35B-A3B
     llm-d.ai/inference-serving: "true"
 spec:
+  serviceName: vllm-qwen36-35b-a3b
   replicas: 1
   selector:
     matchLabels:
