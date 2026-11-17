@@ -1,3 +1,3 @@
-# Isolated GLM 5.3 DP8/EP8 EPLB overlays
+# Parallel GLM 5.3 DP8/EP8 campaigns
 
-These overlays use unique instance labels, Services, Gateway resources, and Routes so separate campaign-runner Jobs can deploy and benchmark NRE=0, 8, and 16 at the same time. Each is derived from its sequential counterpart and retains its vLLM arguments and tokenizer routing.
+The `parallel-baseline` overlay disables EPLB. `parallel-r0`, `parallel-r8`, and `parallel-r16` enable EPLB with 0, 8, and 16 redundant experts. Each overlay has unique serving, tokenizer, Gateway, and route names so separate campaign-runner Jobs can deploy and benchmark concurrently.
