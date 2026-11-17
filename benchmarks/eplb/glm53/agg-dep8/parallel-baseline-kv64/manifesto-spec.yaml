@@ -1,0 +1,17 @@
+extends: ../../../glm53-agg-dep.yaml
+model:
+  image_ref: vllm.nightly_2026-11-16
+roles:
+  decode:
+    workload_name: glm53-eplb-agg-dep8-base-decode
+    lws:
+      size: 2
+      replicas: 1
+    parallelism:
+      tp: 1
+      dp: 8
+      ep: true
+    vllm:
+      enable_eplb: false
+      eplb_config: $delete
+release: glm53-eplb-agg-dep8-parallel-baseline
