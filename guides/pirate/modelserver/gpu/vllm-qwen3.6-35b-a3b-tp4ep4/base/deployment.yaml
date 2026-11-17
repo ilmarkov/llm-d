@@ -19,8 +19,8 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1002110000
-        fsGroup: 1002110000
+        runAsUser: 1002090000
+        fsGroup: 1002090000
       nodeSelector:
         nvidia.com/gpu.product: NVIDIA-A100-SXM4-80GB
       containers:
