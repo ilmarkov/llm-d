@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: vllm-qwen36-35b-a3b
+  labels:
+    llm-d.ai/model: Qwen3.6-35B-A3B
+    llm-d.ai/inference-serving: "true"
+spec:
+  serviceName: vllm-qwen36-35b-a3b
+  replicas: 1
+  selector:
+    matchLabels:
+      llm-d.ai/model: Qwen3.6-35B-A3B
+      llm-d.ai/inference-serving: "true"
+  template:
+    metadata:
+      labels:
+        llm-d.ai/model: Qwen3.6-35B-A3B
+        llm-d.ai/inference-serving: "true"
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1002090000
+        fsGroup: 1002090000
+      nodeSelector:
+        nvidia.com/gpu.product: NVIDIA-A100-SXM4-80GB
+      containers:
+        - name: vllm
+          image: docker.io/vllm/vllm-openai:v0.31.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - vllm
+            - serve
+          args:
+            - Qwen/Qwen3.6-35B-A3B
+            - --host
+            - 0.0.0.0
+            - --port
+            - "8000"
+            - --tensor-parallel-size
+            - "1"
+            - --data-parallel-size
+            - "8"
+            - --enable-expert-parallel
+            - --max-model-len
+            - "262144"
+            - --reasoning-parser
+            - qwen3
+          env:
+            - name: HOME
+              value: /tmp
+            - name: HF_HOME
+              value: /tmp/huggingface
+            - name: XDG_CACHE_HOME
+              value: /tmp/cache
+            - name: VLLM_CACHE_ROOT
+              value: /tmp/vllm-cache
+          ports:
+            - containerPort: 8000
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              nvidia.com/gpu: 8
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 360
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: shm
+              mountPath: /dev/shm
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Gi
+        - name: tmp
+          emptyDir:
+            sizeLimit: 100Gi
+      terminationGracePeriodSeconds: 120
