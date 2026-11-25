@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+- tokenize-services.yaml
+patches:
+- target:
+    group: gateway.networking.k8s.io
+    version: v1
+    kind: HTTPRoute
+    name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-route
+  patch: "- op: add\n  path: /spec/rules/-\n  value:\n    matches:\n    - path:\n\
+    \        type: Exact\n        value: /tokenize\n    backendRefs: &id001\n    -\
+    \ group: ''\n      kind: Service\n      name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-tokenize-dp0\n\
+    \      port: 8000\n      weight: 1\n    - group: ''\n      kind: Service\n   \
+    \   name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-tokenize-dp1\n   \
+    \   port: 8000\n      weight: 1\n    - group: ''\n      kind: Service\n      name:\
+    \ ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-tokenize-dp2\n      port:\
+    \ 8000\n      weight: 1\n    - group: ''\n      kind: Service\n      name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-tokenize-dp3\n\
+    \      port: 8000\n      weight: 1\n- op: add\n  path: /spec/rules/-\n  value:\n\
+    \    matches:\n    - path:\n        type: Exact\n        value: /detokenize\n\
+    \    backendRefs: *id001\n"
