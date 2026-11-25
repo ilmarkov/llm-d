@@ -5,7 +5,10 @@ for the `ilmarkov` owner. It runs one four-member LWS with DP16/EP16, external
 DP load balancing, FlashInfer CuteDSL, and DSpark-5 adaptive verification.
 
 EPLB is enabled with zero redundant experts and `stats_only: true`, which logs
-expert loads without rearranging experts. JSONL snapshots are written to
+expert loads without rearranging experts. DSpark explicitly sets
+`draft_enable_eplb: true`, and inherits the same stats-only config. The GLM
+5.3 draft is a dense Qwen3 model with no MoE layers, so it has no expert-load
+snapshots; JSONL records come from the target MoE model. Snapshots are written to
 `/mnt/lustre/ilmarkov/eplb-research/glm53-agg-dep16-stats-only/eplb-jsonl`;
 balancedness logging is enabled every 1000 steps.
 
