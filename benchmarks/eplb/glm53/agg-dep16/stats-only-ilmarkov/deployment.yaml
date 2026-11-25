@@ -92,7 +92,7 @@ spec:
             type: Directory
         containers:
         - name: vllm
-          image: quay.io/rh-ee-imarkov/vllm-openai:nightly-9bc16ae6a34b1e0fe260e8d12b98568478bf38c3-eplb-stats-arm64
+          image: quay.io/rh-ee-imarkov/vllm-openai:nightly-9bc16ae6a34b1e0fe260e8d12b98568478bf38c3-eplb-stats-dspark-arm64
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
