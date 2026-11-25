@@ -12,6 +12,8 @@ balancedness logging is enabled every 1000 steps.
 `deployment.yaml`, `tokenize-services.yaml`, and `kustomization.yaml` are the
 actual Kubernetes resources. Four local-rank Services provide `/tokenize` and
 `/detokenize` backends across all 16 DP ranks.
+The EPP image is pinned to v0.11.0 because this manifest uses
+`token-producer.vllm.endpointDiscovery`.
 
 `rbac-epp.yaml` contains the EPP Role and RoleBinding. It is deliberately not
 included in the campaign Kustomize build: the `benchmark-campaign` service
