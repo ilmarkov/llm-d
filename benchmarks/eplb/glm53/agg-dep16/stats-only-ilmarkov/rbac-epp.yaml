@@ -1,10 +1,10 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infp-20b5fabf
+  name: ilmarkov-glm53-dep16-stats-infp-20b5fabf
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: epp
 rules:
@@ -39,17 +39,17 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infp-20b5fabf
+  name: ilmarkov-glm53-dep16-stats-infp-20b5fabf
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: epp
 subjects:
 - kind: ServiceAccount
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool-epp
+  name: ilmarkov-glm53-dep16-stats-infpool-epp
   namespace: vllm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infp-20b5fabf
+  name: ilmarkov-glm53-dep16-stats-infp-20b5fabf

@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-tokenize-dp0
+  name: ilmarkov-glm53-dep16-stats-tokenize-dp0
   namespace: vllm
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     app.kubernetes.io/component: model-server
     llm-d.ai/role: decode
     llm-d.ai/inferenceServing: 'true'
@@ -20,12 +20,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-tokenize-dp1
+  name: ilmarkov-glm53-dep16-stats-tokenize-dp1
   namespace: vllm
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     app.kubernetes.io/component: model-server
     llm-d.ai/role: decode
     llm-d.ai/inferenceServing: 'true'
@@ -39,12 +39,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-tokenize-dp2
+  name: ilmarkov-glm53-dep16-stats-tokenize-dp2
   namespace: vllm
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     app.kubernetes.io/component: model-server
     llm-d.ai/role: decode
     llm-d.ai/inferenceServing: 'true'
@@ -58,12 +58,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-tokenize-dp3
+  name: ilmarkov-glm53-dep16-stats-tokenize-dp3
   namespace: vllm
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     app.kubernetes.io/component: model-server
     llm-d.ai/role: decode
     llm-d.ai/inferenceServing: 'true'

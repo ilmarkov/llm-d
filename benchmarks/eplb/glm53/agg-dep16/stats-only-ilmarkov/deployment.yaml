@@ -6,20 +6,20 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-model-server
+  name: ilmarkov-glm53-dep16-stats-model-server
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: model-server
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-dcgm-metrics
+  name: ilmarkov-glm53-dep16-stats-dcgm-metrics
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: monitoring
 data:
@@ -33,10 +33,10 @@ data:
 apiVersion: leaderworkerset.x-k8s.io/v1
 kind: LeaderWorkerSet
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-decode
+  name: ilmarkov-glm53-dep16-stats-decode
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: lws
     llm-d.ai/role: decode
@@ -55,7 +55,7 @@ spec:
       metadata:
         labels:
           app.kubernetes.io/name: manifesto
-          app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+          app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
           llm-d.ai/owner: ilmarkov
           app.kubernetes.io/component: model-server
           llm-d.ai/role: decode
@@ -65,7 +65,7 @@ spec:
         annotations:
           llm-d.ai/active-ports: 8000,8001,8002,8003
       spec:
-        serviceAccountName: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-model-server
+        serviceAccountName: ilmarkov-glm53-dep16-stats-model-server
         terminationGracePeriodSeconds: 0
         volumes:
         - name: dshm
@@ -81,7 +81,7 @@ spec:
             type: Directory
         - name: dcgm-metrics
           configMap:
-            name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-dcgm-metrics
+            name: ilmarkov-glm53-dep16-stats-dcgm-metrics
         - name: sys
           hostPath:
             path: /sys
@@ -459,20 +459,20 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool-epp
+  name: ilmarkov-glm53-dep16-stats-infpool-epp
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: epp
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-epp-config
+  name: ilmarkov-glm53-dep16-stats-epp-config
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: routing
 data:
@@ -547,10 +547,10 @@ data:
 apiVersion: inference.networking.k8s.io/v1
 kind: InferencePool
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool
+  name: ilmarkov-glm53-dep16-stats-infpool
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: routing
 spec:
@@ -561,12 +561,12 @@ spec:
   - number: 8003
   selector:
     matchLabels:
-      app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+      app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
       llm-d.ai/role: decode
       llm-d.ai/inferenceServing: 'true'
       llm-d.ai/deployment: aggregated
   endpointPickerRef:
-    name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool-epp
+    name: ilmarkov-glm53-dep16-stats-infpool-epp
     kind: Service
     port:
       number: 9002
@@ -574,16 +574,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool-epp
+  name: ilmarkov-glm53-dep16-stats-infpool-epp
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: epp
 spec:
   selector:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: epp
   ports:
@@ -599,10 +599,10 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool-epp
+  name: ilmarkov-glm53-dep16-stats-infpool-epp
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: epp
 spec:
@@ -610,19 +610,19 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: manifesto
-      app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+      app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
       llm-d.ai/owner: ilmarkov
       app.kubernetes.io/component: epp
   template:
     metadata:
       labels:
         app.kubernetes.io/name: manifesto
-        app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+        app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
         llm-d.ai/owner: ilmarkov
         app.kubernetes.io/component: epp
-        inferencepool: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool-epp
+        inferencepool: ilmarkov-glm53-dep16-stats-infpool-epp
     spec:
-      serviceAccountName: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool-epp
+      serviceAccountName: ilmarkov-glm53-dep16-stats-infpool-epp
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -642,7 +642,7 @@ spec:
         - --metrics-port=9090
         - --metrics-endpoint-auth=false
         - -v=4
-        - --pool-name=ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool
+        - --pool-name=ilmarkov-glm53-dep16-stats-infpool
         - --pool-namespace=vllm
         - --allow-experimental-plugins
         ports:
@@ -664,15 +664,15 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-epp-config
+          name: ilmarkov-glm53-dep16-stats-epp-config
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-gate-3bc1503c
+  name: ilmarkov-glm53-dep16-stats-gate-3bc1503c
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: gateway
 data:
@@ -696,10 +696,10 @@ data:
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-gateway
+  name: ilmarkov-glm53-dep16-stats-gateway
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: gateway
     istio.io/enable-inference-extproc: 'true'
@@ -708,7 +708,7 @@ spec:
     parametersRef:
       group: ''
       kind: ConfigMap
-      name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-gate-3bc1503c
+      name: ilmarkov-glm53-dep16-stats-gate-3bc1503c
   gatewayClassName: istio
   listeners:
   - name: default
@@ -721,22 +721,22 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-route
+  name: ilmarkov-glm53-dep16-stats-route
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: route
 spec:
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway
-    name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-gateway
+    name: ilmarkov-glm53-dep16-stats-gateway
   rules:
   - backendRefs:
     - group: inference.networking.k8s.io
       kind: InferencePool
-      name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool
+      name: ilmarkov-glm53-dep16-stats-infpool
       port: 8000
       weight: 1
     matches:
@@ -750,14 +750,14 @@ spec:
 apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool-epp
+  name: ilmarkov-glm53-dep16-stats-infpool-epp
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: epp
 spec:
-  host: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool-epp
+  host: ilmarkov-glm53-dep16-stats-infpool-epp
   trafficPolicy:
     connectionPool:
       tcp:
@@ -776,14 +776,14 @@ spec:
 apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:
-  name: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infp-fb53f2b8
+  name: ilmarkov-glm53-dep16-stats-infp-fb53f2b8
   labels:
     app.kubernetes.io/name: manifesto
-    app.kubernetes.io/instance: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov
+    app.kubernetes.io/instance: ilmarkov-glm53-dep16-stats
     llm-d.ai/owner: ilmarkov
     app.kubernetes.io/component: routing
 spec:
-  host: ilmarkov-glm53-eplb-agg-dep16-stats-only-ilmarkov-infpool-ip
+  host: ilmarkov-glm53-dep16-stats-infpool-ip
   trafficPolicy:
     connectionPool:
       tcp:
